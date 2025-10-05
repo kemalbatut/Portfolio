@@ -1,0 +1,46 @@
+/* Smooth underline hover */
+.link-underline {
+  position: relative;
+}
+.link-underline:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width .25s ease;
+}
+.link-underline:hover:after {
+  width: 100%;
+}
+.squares-canvas {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  pointer-events: none; /* let hero get the hover/clicks */
+}
+.squares-canvas { width:100%; height:100%; border:none; display:block; pointer-events:none; }
+.link-underline { position: relative; }
+.link-underline:after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background: currentColor; transition: width .25s ease; }
+.link-underline:hover:after { width:100%; }
+/* Smooth theme switch (respects reduced motion) */
+:root {
+  --theme-transition: background-color 700ms ease, color 700ms ease,
+                      border-color 700ms ease, fill 700ms ease,
+                      stroke 700ms ease, box-shadow 700ms ease;
+}
+
+/* When this class is on <html>, everything eases */
+.theme-transition, .theme-transition * {
+  transition: var(--theme-transition);
+}
+
+/* Accessibility: no animation for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition, .theme-transition * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Prevent dark-mode flash -->
+  <script>
+    (() => {
+      const t = localStorage.getItem('theme');
+      if (t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+
+  <title>Kemal Batu Turgut — Portfolio</title>
+  <meta name="description" content="Portfolio of Kemal Batu Turgut — C++ / Full-Stack Developer. Projects, skills, experience, and contact." />
+
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Kemal Batu Turgut — Portfolio" />
+  <meta property="og:description" content="C++ / Full-Stack projects, skills, experience, and contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: { brand: { DEFAULT: '#6d28d9' } },
+          boxShadow: { glow: '0 10px 30px -10px rgba(109,40,217,0.45)' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Your CSS (cache-busted) -->
+  <link rel="stylesheet" href="style.css?v=4">
+
+  <!-- Theme store for toggle -->
+  <script>
+    const themeStore = {
+      get: () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+      set: (v) => localStorage.setItem('theme', v)
+    };
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-family='Arial' font-size='34' text-anchor='middle' fill='white'%3EK%3C/text%3E%3C/svg%3E" />
+</head>
+<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-950/70 border-b border-slate-200/60 dark:border-slate-800">
+    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <a href="#" class="font-semibold tracking-tight text-lg">Kemal Batu <span class="text-brand">Turgut</span></a>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="#projects" class="link-underline">Projects</a>
+        <a href="#skills" class="link-underline">Skills</a>
+        <a href="#experience" class="link-underline">Experience</a>
+        <a href="#contact" class="link-underline">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="./KemalBatu-CV.pdf" class="hidden sm:inline-block rounded-xl border border-brand/20 px-4 py-2 text-sm font-medium hover:shadow-glow hover:-translate-y-px transition" download>Download CV</a>
+        <button id="themeBtn" class="rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle dark mode">
+          <svg id="sun" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0-1.414-1.414M7.05 7.05 5.636 5.636"/><circle cx="12" cy="12" r="4"/></svg>
+          <svg id="moon" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fixed blur just below the header -->
+  <div class="edge-blur-fixed edge-blur-fixed--below-header"
+       style="--edge-top-size:6rem; --edge-blur-strength:14px"
+       aria-hidden="true"></div>
+
+  <!-- Fixed blur at the bottom of the viewport -->
+  <div class="edge-blur-fixed edge-blur-fixed--bottom"
+       style="--edge-blur-size:10rem; --edge-blur-strength:14px"
+       aria-hidden="true"></div>
+
+  <!-- Hero -->
+  <section id="hero" class="relative overflow-hidden min-h-[60vh] sm:min-h-[70vh]">
+    <!-- squares background -->
+    <div class="absolute inset-0 -z-10">
+      <canvas id="squares-bg" class="squares-canvas"></canvas>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24 grid md:grid-cols-2 gap-10 items-center relative z-10">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-bold leading-tight">C++ / Full-Stack Developer</h1>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">I build reliable, fast software — from modern C++ backends and systems code to RESTful services and clean web UIs. Passionate about performance, DX, and shipping.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#projects" class="rounded-xl bg-brand px-5 py-3 text-white font-medium shadow-glow">View Projects</a>
+          <a href="mailto:hello@yourdomain.dev" class="rounded-xl border px-5 py-3 font-medium">Email Me</a>
+          <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" class="rounded-xl border px-5 py-3 font-medium">GitHub</a>
+          <a href="https://www.linkedin.com/in/yourhandle" target="_blank" rel="noopener noreferrer" class="rounded-xl border px-5 py-3 font-medium">LinkedIn</a>
+        </div>
+      </div>
+      <div class="rounded-2xl bg-gradient-to-br from-brand/15 to-transparent p-1">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800">
+          <pre class="text-sm leading-6 overflow-auto"><code>// Highlights
+Languages   : Modern C++ (17/20/23), TypeScript, Python
+Frameworks  : Node, Express, React, Next.js
+Tooling     : CMake, Conan, vcpkg, Git, Docker
+Concepts    : OOP, templates, STL, async, REST, CI/CD
+Focus       : Performance, optimization, dev experience</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="mx-auto max-w-6xl px-4 py-14">
+    <div class="flex items-end justify-between gap-4">
+      <h2 class="text-2xl sm:text-3xl font-bold">Selected Projects</h2>
+      <a href="https://github.com/yourhandle?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-sm link-underline">See all →</a>
+    </div>
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">RPG Battle Engine (C++)</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">C++20</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Turn-based engine with templated entities, abilities, and ECS-style systems. Emphasis on strong types and zero-cost abstractions.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">STL</li>
+          <li class="rounded-full border px-2 py-1">Templates</li>
+          <li class="rounded-full border px-2 py-1">Unit Tests</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Assembly Line Simulator</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">C++17</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Multi-module system (Workstation, LineManager, CustomerOrder) simulating production flow with thread-safe queues and profiling.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">Concurrency</li>
+          <li class="rounded-full border px-2 py-1">Perf</li>
+          <li class="rounded-full border px-2 py-1">CLI</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Case Study</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Bakery Admin (Full-Stack)</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">Node/React</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Inventory & orders dashboard with Express API, JWT auth, and a polished React UI. Deployed to Render/Netlify.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">Express</li>
+          <li class="rounded-full border px-2 py-1">PostgreSQL</li>
+          <li class="rounded-full border px-2 py-1">React</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Media Manager (C++)</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">C++20</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">RAII smart-pointer design for safe multimedia asset lifecycles; command pattern for batch ops; fast CSV/JSON IO.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">RAII</li>
+          <li class="rounded-full border px-2 py-1">I/O</li>
+          <li class="rounded-full border px-2 py-1">Design Patterns</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Readme</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Depth Maps (Computer Vision)</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">Python</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Stereo-vision pipeline generating disparity & depth maps; OpenCV + Numpy, with visualization and metrics.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">OpenCV</li>
+          <li class="rounded-full border px-2 py-1">NumPy</li>
+          <li class="rounded-full border px-2 py-1">Visualization</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Notebook</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+
+      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold text-lg">Appointment Booking App</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">Full-Stack</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">REST API + React SPA with calendar sync and role-based access. Clean components, hooks, and testing.</p>
+        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+          <li class="rounded-full border px-2 py-1">REST</li>
+          <li class="rounded-full border px-2 py-1">React</li>
+          <li class="rounded-full border px-2 py-1">Testing</li>
+        </ul>
+        <div class="mt-4 flex gap-3 text-sm">
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-2xl sm:text-3xl font-bold">Skills</h2>
+    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <h3 class="font-semibold">Languages</h3>
+        <p class="mt-2 text-sm">C++ (17/20/23), TypeScript, JavaScript, Python, SQL</p>
+      </div>
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <h3 class="font-semibold">Frameworks</h3>
+        <p class="mt-2 text-sm">Node, Express, React, Next.js</p>
+      </div>
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <h3 class="font-semibold">Tools</h3>
+        <p class="mt-2 text-sm">Git, CMake, Conan, vcpkg, Docker, Linux</p>
+      </div>
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <h3 class="font-semibold">CS Concepts</h3>
+        <p class="mt-2 text-sm">OOP, templates, STL, concurrency, data structures, testing</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience & Education -->
+  <section id="experience" class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-2xl sm:text-3xl font-bold">Experience</h2>
+    <div class="mt-6 space-y-5">
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold">Student Projects — Seneca College</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">2023–2025</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Built multiple C++ modules (Workstation, LineManager, CustomerOrder), implemented templates and STL algorithms, and delivered clean, well-documented code.</p>
+        <ul class="mt-2 list-disc list-inside text-sm text-slate-600 dark:text-slate-300">
+          <li>Optimized data flows and memory safety with RAII and smart pointers</li>
+          <li>Added unit tests and CI to ensure reliability</li>
+        </ul>
+      </div>
+      <div class="rounded-2xl border p-5 dark:border-slate-800">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold">Freelance / Side Projects</h3>
+          <span class="text-xs rounded-full px-2 py-1 border">Ongoing</span>
+        </div>
+        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Full-stack experiments with Node/React, performance profiling in C++, and automation scripts.</p>
+      </div>
+    </div>
+
+    <h2 class="text-2xl sm:text-3xl font-bold mt-12">Education</h2>
+    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
+      <div class="flex items-center justify-between">
+        <h3 class="font-semibold">ON, Seneca College — C++/Computer Studies</h3>
+        <span class="text-xs rounded-full px-2 py-1 border">2023–2025</span>
+      </div>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Focused on OOP, STL, templates, and software engineering best practices.</p>
+    </div>
+    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
+      <div class="flex items-center justify-between">
+        <h3 class="font-semibold">NS, Parkview Education Centre Highschool</h3>
+        <span class="text-xs rounded-full px-2 py-1 border">2022–2023</span>
+      </div>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Finished highschool as an exchange student, led robotics team in Acadia Robofest.</p>
+    </div>
+    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
+      <div class="flex items-center justify-between">
+        <h3 class="font-semibold">Lublin, Erasmus+ Highschool</h3>
+        <span class="text-xs rounded-full px-2 py-1 border">2019–2019</span>
+      </div>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Attended Erasmus project where I was a student in poland</p>
+    </div>
+    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
+      <div class="flex items-center justify-between">
+        <h3 class="font-semibold">Istanbul, Oguz kaan Highschool</h3>
+        <span class="text-xs rounded-full px-2 py-1 border">2018–2022</span>
+      </div>
+      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Attended Erasmus project where I was a student in poland</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="mx-auto max-w-6xl px-4 py-14">
+    <div class="rounded-2xl border p-6 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold">Let’s build something</h2>
+        <p class="mt-2 text-slate-600 dark:text-slate-300">Open to internships, junior dev roles, and freelance work. Fast learner, strong fundamentals.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <a href="mailto:hello@yourdomain.dev" class="rounded-xl bg-brand px-5 py-3 text-white font-medium shadow-glow">Email Me</a>
+        <a href="https://linkedin.com/in/yourhandle" target="_blank" rel="noopener noreferrer" class="rounded-xl border px-5 py-3 font-medium">LinkedIn</a>
+        <a href="https://github.com/yourhandle" target="_blank" rel="noopener noreferrer" class="rounded-xl border px-5 py-3 font-medium">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 text-center text-sm text-slate-500">
+    © <span id="year"></span> Kemal Batu Turgut. Built with HTML + Tailwind. Hosted on GitHub Pages.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+   document.getElementById('themeBtn').addEventListener('click', () => {
+    const root = document.documentElement;
+    const DURATION_MS = 700; // <- adjust to taste (500–1000ms is comfy)
+
+    // Add transition class just for the toggle moment
+    root.classList.add('theme-transition');
+
+    // Toggle dark class (your current behavior) and persist
+    const isDark = root.classList.toggle('dark');
+    themeStore.set(isDark ? 'dark' : 'light');
+
+    // Clean up after the transition finishes
+    window.setTimeout(() => {
+      root.classList.remove('theme-transition');
+    }, DURATION_MS);
+  });
+</script>
+
+  </script>
+
+  <!-- Keeps --header-h var in sync with the sticky header height -->
+  <script>
+    (() => {
+      const header = document.querySelector('header');
+      if (!header) return;
+      const setHeaderH = () => {
+        const h = Math.ceil(header.getBoundingClientRect().height);
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      };
+      const ro = new ResizeObserver(setHeaderH);
+      ro.observe(header);
+      window.addEventListener('load', setHeaderH);
+      setHeaderH();
+    })();
+  </script>
+
+  <!-- Squares background logic -->
+  <script src="square.js" defer></script>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kemal Batu Turgut",
+    "jobTitle": "Software Developer",
+    "url": "https://yourdomain.dev",
+    "sameAs": [
+      "https://github.com/yourhandle",
+      "https://www.linkedin.com/in/yourhandle"
+    ],
+    "knowsAbout": ["C++", "STL", "Templates", "React", "Node.js", "Docker"]
+  }
+  </script>
+</body>
+</html>
