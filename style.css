@@ -32,24 +32,30 @@
   .theme-transition, .theme-transition * { transition: none !important; }
 }
 
-/* Hero button hover fill animation */
-.btn-outline {
+/* Hero button hover fill animation (works without Tailwind build) */
+:root { --brand: #6d28d9; }
+
+.btn-outline{
   position: relative;
+  z-index: 0;              /* create stacking context */
+  display: inline-block;   /* ensure the pseudo fills the box */
   overflow: hidden;
-  border: 1px solid var(--brand); /* <-- replaced theme() */
+  border: 1px solid var(--brand);
+  background: transparent;
   color: inherit;
-  transition: color 0.3s ease;
+  transition: color .3s ease;
 }
-.btn-outline::before {
+
+.btn-outline::before{
   content: '';
   position: absolute;
   inset: 0;
-  background-color: var(--brand);
+  background: var(--brand);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.3s ease;
-  z-index: 0;
+  transition: transform .3s ease;
+  z-index: -1;             /* put fill behind the text */
 }
-.btn-outline:hover::before { transform: scaleX(1); }
-.btn-outline:hover { color: #fff; }
-.btn-outline > * { position: relative; z-index: 1; }
+
+.btn-outline:hover::before{ transform: scaleX(1); }
+.btn-outline:hover{ color: #fff; }
