@@ -59,3 +59,9 @@
 
 .btn-outline:hover::before{ transform: scaleX(1); }
 .btn-outline:hover{ color: #fff; }
+
+hero subtitle bold and darker in light mode only */
+:root:not(.dark) #hero p {
+  color: #111827;   /* Tailwind's slate-900 / near-black */
+  font-weight: 600; /* semi-bold */
+}
