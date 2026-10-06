@@ -1,439 +1,420 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Prevent dark-mode flash -->
-  <script>
-    (() => {
-      const t = localStorage.getItem('theme');
-      if (t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
-    })();
-  </script>
-
-  <title>Kemal Batu Turgut - Portfolio</title>
- <meta name="description" content="Portfolio of Kemal Batu Turgut — Computer Science student building systems software, robotics projects, and digital hardware logic. Projects, skills, experience, and contact." />
-
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#6d28d9" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Kemal Batu Turgut - Portfolio" />
-  <meta property="og:description" content="C++ / Full-Stack projects, skills, experience, and contact." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Kemal Batu Turgut — Computer Science student focused on systems, embedded software, robotics, and computer architecture." />
+  <meta name="theme-color" content="#11110f" />
+  <meta property="og:title" content="Kemal Batu Turgut — Systems, Embedded & Robotics" />
+  <meta property="og:description" content="From gate-level logic to physical robots: selected engineering projects, systems work, and experiments." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="./media/8bit_ALU.png" />
+  <title>Kemal Batu Turgut — Systems, Embedded & Robotics</title>
 
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: { brand: { DEFAULT: '#6d28d9' } },
-          boxShadow: { glow: '0 10px 30px -10px rgba(109,40,217,0.45)' }
-        }
-      }
-    }
-  </script>
-
-  <!-- Your CSS (cache-busted) -->
-  <link rel="stylesheet" href="style.css?v=4">
-
-  <!-- Theme store for toggle -->
-  <script>
-    const themeStore = {
-      get: () => localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
-      set: (v) => localStorage.setItem('theme', v)
-    };
-  </script>
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%236d28d9'/%3E%3Ctext x='50%25' y='54%25' font-family='Arial' font-size='34' text-anchor='middle' fill='white'%3EK%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
-<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
-  <!-- Header -->
-  <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/70 dark:supports-[backdrop-filter]:bg-slate-950/70 border-b border-slate-200/60 dark:border-slate-800">
-    <div class="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-      <a href="#" class="font-semibold tracking-tight text-lg">Kemal Batu <span class="text-brand">Turgut</span></a>
-      <nav class="hidden md:flex gap-6 text-sm">
-        <a href="#projects" class="link-underline">Projects</a>
-        <a href="#skills" class="link-underline">Skills</a>
-        <a href="#experience" class="link-underline">Experience</a>
-        <a href="#education" class="link-underline">Education</a>
-        <a href="#contact" class="link-underline">Contact</a>
-      </nav>
-      <div class="flex items-center gap-2">
-        <a href="./KemalBatu-CV.pdf" class="hidden sm:inline-block rounded-xl border border-brand/20 px-4 py-2 text-sm font-medium hover:shadow-glow hover:-translate-y-px transition" download>Download CV</a>
-        <button id="themeBtn" class="rounded-full p-2 hover:bg-slate-100 dark:hover:bg-slate-800 transition" aria-label="Toggle dark mode">
-          <svg id="sun" class="h-5 w-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0-1.414-1.414M7.05 7.05 5.636 5.636"/><circle cx="12" cy="12" r="4"/></svg>
-          <svg id="moon" class="h-5 w-5 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-      </div>
-    </div>
+<body>
+  <div class="page-grain" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <span class="brand-mark">KBT</span>
+      <span class="brand-name">Kemal Batu Turgut</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="availability" href="#contact">
+      <span class="availability-dot"></span>
+      Open to co-op
+    </a>
   </header>
 
-  <!-- Fixed blur just below the header -->
-  <div class="edge-blur-fixed edge-blur-fixed--below-header"
-       style="--edge-top-size:6rem; --edge-blur-strength:14px"
-       aria-hidden="true"></div>
+  <main id="top">
+    <section class="hero section-shell" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow hero-reveal">Toronto · Computer Science · Building toward robotics & systems</p>
 
-  <!-- Fixed blur at the bottom of the viewport -->
-  <div class="edge-blur-fixed edge-blur-fixed--bottom"
-       style="--edge-blur-size:10rem; --edge-blur-strength:14px"
-       aria-hidden="true"></div>
+        <h1 class="hero-title" aria-label="I build systems that leave the screen">
+          <span class="hero-line"><span>I build systems</span></span>
+          <span class="hero-line"><span>that <em>leave</em></span></span>
+          <span class="hero-line"><span>the screen.</span></span>
+        </h1>
 
-  <!-- Hero -->
-  <section id="hero" class="relative overflow-hidden min-h-[60vh] sm:min-h-[70vh]">
-    <!-- squares background -->
-    <div class="absolute inset-0 -z-10">
-      <canvas id="squares-bg" class="squares-canvas"></canvas>
-    </div>
+        <div class="hero-bottom hero-reveal">
+          <p class="hero-intro">
+            I work from the bottom up — digital logic, C++, embedded control,
+            sensors, actuators, and physical machines. I care about what the
+            software is actually doing to memory, timing, signals, and hardware.
+          </p>
 
-    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24 grid md:grid-cols-2 gap-10 items-center relative z-10">
-      <div>
-<h1 class="text-4xl sm:text-5xl font-bold leading-tight">Computer Science • Systems • Embedded • Architecture</h1>
-
-<p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
-  I work across systems software, embedded development, and computer architecture. My focus is building reliable
-  solutions by thinking at the level of data structures, memory, timing, and interfaces, not just code that “runs.”
-</p>
-
-       <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#projects" class="rounded-xl bg-brand px-5 py-3 text-white font-medium shadow-glow">View Projects</a>
-          <a href="mailto:kemalbatut@gmail.com" class="btn-outline rounded-xl px-5 py-3 font-medium">Email Me</a>
-          <a href="https://github.com/kemalbatut" target="_blank" rel="noopener noreferrer" class="btn-outline rounded-xl px-5 py-3 font-medium">GitHub</a>
+          <div class="hero-actions">
+            <a class="button button-primary magnetic" href="#work">Explore selected work</a>
+            <a class="text-link" href="https://github.com/kemalbatut" target="_blank" rel="noreferrer">GitHub ↗</a>
+          </div>
         </div>
       </div>
-      <div class="rounded-2xl bg-gradient-to-br from-brand/15 to-transparent p-1">
-        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6 border border-slate-200 dark:border-slate-800">
-<pre class="text-sm leading-6 overflow-auto"><code>// Highlights
-Core        : Data Structures & Algorithms, Problem Solving
-Systems     : Memory, concurrency, performance
-Architecture: CPU/datapath thinking, control logic,
-Embedded    : Microcontrollers, I/O, sensors/actuators
-Software    : Modern C++, APIs, web interfaces, automation
-Tooling     : GitHub, Linux, Docker, CI/CD</code></pre>
 
-        </div>
+      <div class="hero-orbit" aria-hidden="true">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit-core">01</div>
+        <span class="orbit-label orbit-label-a">systems</span>
+        <span class="orbit-label orbit-label-b">embedded</span>
+        <span class="orbit-label orbit-label-c">robotics</span>
       </div>
-    </div>
-  </section>
 
-  <!-- Projects -->
-   
-  <section id="projects" class="mx-auto max-w-6xl px-4 py-14">
-    <div class="flex items-end justify-between gap-4">
-      <h2 class="text-2xl sm:text-3xl font-bold">Selected Projects</h2>
-      <a href="https://github.com/kemalbatut?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-sm link-underline">See all →</a>
-    </div>
-    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:shadow-glow hover:-translate-y-0.5 transition">
-    <div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-      <img src="./media/Robofest  05 copy.jpg" alt="Acadia Robofest Robot" class="h-full w-full object-cover transition-transform group-hover:scale-105" />
-    </div>
-    <div class="p-5">
-      <div class="flex items-center justify-between">
-        <h3 class="font-semibold text-lg">Acadia Robofest</h3>
-        <span class="text-xs rounded-full px-2 py-1 border">Lead / Robotics</span>
+      <a class="scroll-cue" href="#manifesto" aria-label="Scroll to continue">
+        <span>scroll</span>
+        <span class="scroll-line"></span>
+      </a>
+    </section>
+
+    <section class="manifesto" id="manifesto" aria-label="Areas of focus">
+      <div class="marquee-row marquee-left">
+        <span>SYSTEMS</span><i>✦</i><span>EMBEDDED</span><i>✦</i><span>ROBOTICS</span><i>✦</i><span>COMPUTER ARCHITECTURE</span><i>✦</i><span>C++</span><i>✦</i>
+        <span>SYSTEMS</span><i>✦</i><span>EMBEDDED</span><i>✦</i><span>ROBOTICS</span><i>✦</i><span>COMPUTER ARCHITECTURE</span><i>✦</i><span>C++</span><i>✦</i>
       </div>
-      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-        Led a robotics team at Parkview Education Centre. Engineered an autonomous robot to navigate dynamic environments and solve "Unknown Task Factors" (UTFs) using sensor fusion.
+      <div class="marquee-row marquee-right">
+        <span>SIGNALS</span><i>✦</i><span>MEMORY</span><i>✦</i><span>MOTION</span><i>✦</i><span>CONTROL</span><i>✦</i><span>HARDWARE</span><i>✦</i>
+        <span>SIGNALS</span><i>✦</i><span>MEMORY</span><i>✦</i><span>MOTION</span><i>✦</i><span>CONTROL</span><i>✦</i><span>HARDWARE</span><i>✦</i>
+      </div>
+    </section>
+
+    <section class="work-intro section-shell" id="work">
+      <div data-reveal>
+        <p class="eyebrow">Selected work · 2025—2026</p>
+        <h2>Projects where code meets <em>something real.</em></h2>
+      </div>
+      <p class="work-intro-copy" data-reveal>
+        Not a wall of identical cards. Each project below represents a different
+        layer of the stack: logic, embedded control, robotics, and autonomous systems.
       </p>
-      <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-        <li class="rounded-full border px-2 py-1">Autonomous Logic</li>
-        <li class="rounded-full border px-2 py-1">Sensor Fusion</li>
-        <li class="rounded-full border px-2 py-1">PID</li>
-      </ul>
-    </div>
-  </article>
+    </section>
 
-        <article class="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:shadow-glow hover:-translate-y-0.5 transition">
-    <div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-      <img src="./media/cs-yolo 01.png" alt="Acadia Robofest Robot" class="h-full w-full object-cover transition-transform group-hover:scale-105" />
-    </div>
-    <div class="p-5">
-      <div class="flex items-center justify-between">
-    <h3 class="font-semibold text-lg">CS-YOLO (AI Object Detection)</h3>
-    <span class="text-xs rounded-full px-2 py-1 border">Python/C#</span>
-  </div>
-  <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-    Real-time YOLO-based vision system for CS2, integrating Python + C# with foreground window detection and mouse input control. Features model inference, event handling, and automation pipeline.
-  </p>
-  <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-    <li class="rounded-full border px-2 py-1">YOLOv8</li>
-    <li class="rounded-full border px-2 py-1">OpenCV</li>
-    <li class="rounded-full border px-2 py-1">Automation</li>
-  </ul>
-  <div class="mt-4 flex gap-3 text-sm">
-    <a class="link-underline" href="https://github.com/kemalbatut/cs-yolo" target="_blank" rel="noopener noreferrer">Source</a>
-  </div>
-</article>
-
-<article class="group overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 hover:shadow-glow hover:-translate-y-0.5 transition">
-  <div class="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-    <img src="./media/8bit_ALU.png" alt="8-bit CPU ALU diagram" class="h-full w-full object-cover transition-transform group-hover:scale-105" />
-  </div>
-
-  <div class="p-5">
-    <div class="flex items-center justify-between">
-      <h3 class="font-semibold text-lg">8-bit CPU (Datapath + ALU)</h3>
-      <span class="text-xs rounded-full px-2 py-1 border">Digital Logic</span>
-    </div>
-
-    <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-      Built an 8-bit CPU by defining a clear datapath and then implementing it block-by-block:
-      registers feeding a shared bus, an ALU for core operations, and control lines that coordinate each
-      step of an instruction. Debugged at the signal level, validating bit transitions, flag behavior,
-      and timing across multi-step execution rather than only checking final outputs.
-    </p>
-
-    <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-      <li class="rounded-full border px-2 py-1">Datapath Design</li>
-      <li class="rounded-full border px-2 py-1">8-bit ALU</li>
-      <li class="rounded-full border px-2 py-1">Registers & Bus</li>
-      <li class="rounded-full border px-2 py-1">Control Signals</li>
-      <li class="rounded-full border px-2 py-1">Flags & Timing</li>
-            <li class="rounded-full border px-2 py-1">SRAM module</li>
-    </ul>
-
-    <div class="mt-4 flex gap-3 text-sm">
-      <a class="link-underline" href="https://github.com/kemalbatut/8bit_CPU" target="_blank" rel="noopener noreferrer">Source</a>
-    </div>
-  </div>
-</article>
-
-
-
-      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Assembly Line Simulator</h3>
-          <span class="text-xs rounded-full px-2 py-1 border">C++17</span>
+    <section class="project-story project-dark" id="cpu-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame project-frame-dark" data-parallax-image>
+          <img src="./media/8bit_ALU.png" alt="8-bit CPU digital logic circuit" />
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">01</span>
         </div>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Multi-module system (Workstation, LineManager, CustomerOrder) simulating production flow with thread-safe queues and profiling.</p>
-        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-          <li class="rounded-full border px-2 py-1">Concurrency</li>
-          <li class="rounded-full border px-2 py-1">Perf</li>
-          <li class="rounded-full border px-2 py-1">CLI</li>
-        </ul>
-        <div class="mt-4 flex gap-3 text-sm">
-        <a class="link-underline" href="https://github.com/kemalbatut/OOP345-Workshops/tree/main/Assignment4" target="_blank" rel="noopener noreferrer">Source</a>
+      </div>
+
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Digital logic · Architecture</span>
+          <h3>8-Bit CPU</h3>
+          <p class="project-lead">A computing system built from the logic level upward.</p>
         </div>
-      </article>
 
-      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Media Manager (C++)</h3>
-          <span class="text-xs rounded-full px-2 py-1 border">C++20</span>
+        <div class="project-details" data-reveal>
+          <p>
+            I started with individual logic gates and 1-bit ALU slices, then scaled
+            the design into an 8-bit ALU with decoder-controlled operations,
+            ripple-carry addition, flip-flop memory, timer-driven selection, and an
+            output stage.
+          </p>
+          <p>
+            The value of the project was not hiding complexity behind prebuilt blocks.
+            It was tracing failures at the signal level — reversed carry propagation,
+            decoder routing, carry leakage, and unstable storage behavior — until the
+            complete system behaved as expected.
+          </p>
         </div>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">RAII smart-pointer design for safe multimedia asset lifecycles; command pattern for batch ops; fast CSV/JSON IO.</p>
-        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-          <li class="rounded-full border px-2 py-1">RAII</li>
-          <li class="rounded-full border px-2 py-1">I/O</li>
-          <li class="rounded-full border px-2 py-1">Design Patterns</li>
-        </ul>
-        <div class="mt-4 flex gap-3 text-sm">
-        <a class="link-underline" href="https://github.com/kemalbatut/OOP345-Workshops/tree/main/Assignment3" target="_blank" rel="noopener noreferrer">Source</a>
+
+        <div class="project-specs" data-reveal>
+          <div><span>Width</span><strong>8-bit</strong></div>
+          <div><span>ALU</span><strong>AND · OR · NOT · ADD</strong></div>
+          <div><span>Memory</span><strong>8 × 8 D-FF matrix</strong></div>
+          <div><span>Verification</span><strong>16 / 16 ALU tests</strong></div>
         </div>
-      </article>
 
-      <article class="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 p-5 hover:shadow-glow hover:-translate-y-0.5 transition">
-        <div class="flex items-center justify-between">
-          <h3 class="font-semibold text-lg">Appointment Booking App</h3>
-          <span class="text-xs rounded-full px-2 py-1 border">Full-Stack</span>
+        <a class="project-link" href="https://github.com/kemalbatut/8bit_CPU" target="_blank" rel="noreferrer">View engineering log & source <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="project-story project-light" id="scraparm-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame" data-parallax-image>
+          <img src="./media/scraparm-full.jpg" alt="ScrapArm 4-DOF robotic arm prototype" />
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">02</span>
         </div>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">REST API + React SPA with calendar sync and role-based access. Clean components, hooks, and testing.</p>
-        <ul class="mt-3 flex flex-wrap gap-2 text-xs">
-          <li class="rounded-full border px-2 py-1">REST</li>
-          <li class="rounded-full border px-2 py-1">React</li>
-          <li class="rounded-full border px-2 py-1">Testing</li>
-        </ul>
-        <div class="mt-4 flex gap-3 text-sm">
-          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
-          <a class="link-underline" href="#" target="_blank" rel="noopener noreferrer">Source</a>
+      </div>
+
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Embedded · Robotics · Mechatronics</span>
+          <h3>ScrapArm</h3>
+          <p class="project-lead">A 4-DOF servo-driven arm built to turn control code into motion.</p>
         </div>
-      </article>
-    </div>
-  </section>
 
-  <!-- Skills -->
-  <section id="skills" class="mx-auto max-w-6xl px-4 py-14">
-    <h2 class="text-2xl sm:text-3xl font-bold">Skills</h2>
-    <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="rounded-2xl border p-5 dark:border-slate-800">
-        <h3 class="font-semibold">Languages</h3>
-        <p class="mt-2 text-sm">C++ (17/20/23), TypeScript, JavaScript, Python, SQL</p>
-      </div>
-      <div class="rounded-2xl border p-5 dark:border-slate-800">
-        <h3 class="font-semibold">Frameworks</h3>
-        <p class="mt-2 text-sm">Node, Express, React, Next.js</p>
-      </div>
-      <div class="rounded-2xl border p-5 dark:border-slate-800">
-        <h3 class="font-semibold">Tools</h3>
-        <p class="mt-2 text-sm">Git, CMake, Conan, vcpkg, Docker, Linux</p>
-      </div>
-      <div class="rounded-2xl border p-5 dark:border-slate-800">
-        <h3 class="font-semibold">CS Concepts</h3>
-        <p class="mt-2 text-sm">OOP, templates, STL, concurrency, data structures, testing</p>
-      </div>
-    </div>
-  </section>
+        <div class="project-details" data-reveal>
+          <p>
+            ScrapArm is a hands-on robotics platform for learning actuator control,
+            mechanical linkage behavior, power delivery, coordinate thinking, and the
+            messy reality of integrating hardware that has tolerances, current demands,
+            and physical limits.
+          </p>
+          <p>
+            The prototype uses an Arduino-controlled servo architecture with an
+            externally powered actuator system. Bench testing was performed at 5 V
+            with a 3 A current limit while the arm was brought up joint by joint.
+          </p>
+        </div>
 
+        <div class="scraparm-gallery" data-reveal>
+          <figure>
+            <img src="./media/servo-closeup.jpg" alt="Close-up of ScrapArm servo joint" />
+            <figcaption>Joint / servo integration</figcaption>
+          </figure>
+          <figure>
+            <img src="./media/bench-supply.jpg" alt="Bench power supply set to 5 volts and 3 amp current limit" />
+            <figcaption>5 V bench testing</figcaption>
+          </figure>
+          <figure>
+            <img src="./media/scraparm-angle.jpg" alt="ScrapArm prototype from an alternate angle" />
+            <figcaption>Mechanical linkage</figcaption>
+          </figure>
+        </div>
 
-<!-- Experience -->
-<section id="experience" class="mx-auto max-w-6xl px-4 py-14">
-  <h2 class="text-2xl sm:text-3xl font-bold">Experience</h2>
-  <div class="mt-6 space-y-5">
-    <div class="rounded-2xl border p-5 dark:border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="font-semibold">Projects & Leadership</h3>
+        <a class="project-link" href="https://github.com/kemalbatut/ScrapArm-v1" target="_blank" rel="noreferrer">View ScrapArm repository <span>↗</span></a>
+      </div>
+    </section>
 
+    <section class="project-story project-blue" id="scraprover-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame image-fallback" data-parallax-image data-image-fallback>
+          <img src="./media/scraprover-hero.jpg" alt="ScrapRover mobile robotics platform" />
+          <div class="fallback-copy">
+            <span>ScrapRover</span>
+            <small>project photo reserved</small>
+          </div>
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">03</span>
+        </div>
       </div>
 
-      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
-        Built software and hardware projects across C++ systems programming, embedded robotics (Arduino),
-        and hands-on engineering builds (including an in-progress CPU and robot prototypes).
-      </p>
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Mobile robotics · Embedded control</span>
+          <h3>ScrapRover</h3>
+          <p class="project-lead">The next physical platform in the Scrap series.</p>
+        </div>
 
-      <ul class="mt-2 list-disc list-inside text-sm text-slate-600 dark:text-slate-300">
-        <li>Designing and building a CPU project: architecture, components, and step-by-step bring-up</li>
-        <li>Developed C++ modules and tooling with attention to readability, memory safety, and maintainability</li>
-        <li>Led a robotics team: planning, task breakdown, testing, and iteration under real constraints</li>
-        <li>Built embedded prototypes with Arduino sensors/actuators, wiring, debugging, and rapid iteration</li>
-      </ul>
-    </div>
-  </div>
-</section>
+        <div class="project-details" data-reveal>
+          <p>
+            ScrapRover extends the same build-first philosophy into mobile robotics:
+            motor control, power distribution, sensing, navigation logic, and the
+            iterative process of making software survive contact with a physical platform.
+          </p>
+          <p class="muted-note">
+            This section is already designed for the final build photo. Drop
+            <code>scraprover-hero.jpg</code> into the media folder and the layout will
+            switch from the reserved artwork to the real machine automatically.
+          </p>
+        </div>
 
+        <div class="project-specs" data-reveal>
+          <div><span>Focus</span><strong>Mobile robotics</strong></div>
+          <div><span>Layer</span><strong>Hardware ↔ control</strong></div>
+          <div><span>Status</span><strong>Active build</strong></div>
+        </div>
+      </div>
+    </section>
 
-  <!-- Education -->
-<section id="education" class="mx-auto max-w-6xl px-4 py-14">
-  <h2 class="text-2xl sm:text-3xl font-bold">Education</h2>
-    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="font-semibold">ON, Seneca College - Computer Science</h3>
-        <span class="text-xs rounded-full px-2 py-1 border">2023–2027</span>
+    <section class="project-story project-paper" id="robofest-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame" data-parallax-image>
+          <img src="./media/Robofest  05 copy.jpg" alt="Acadia Robofest autonomous robot project" />
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">04</span>
+        </div>
       </div>
-      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Focused on computer science fundamentals and best practices.</p>
-    </div>
-    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="font-semibold">NS, Parkview Education Centre Highschool</h3>
-        <span class="text-xs rounded-full px-2 py-1 border">2022–2023</span>
-      </div>
-      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Finished highschool as an exchange student, where I led robotics team in Acadia Robofest.</p>
-    </div>
-    <div class="mt-6 rounded-2xl border p-5 dark:border-slate-800">
-      <div class="flex items-center justify-between">
-        <h3 class="font-semibold">Lublin, Erasmus+ Highschool</h3>
-        <span class="text-xs rounded-full px-2 py-1 border">2019–2019</span>
-      </div>
-      <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">Attended Erasmus project as an exchange student in Poland</p>
-    </div>
 
-  <!-- Contact -->
-  <section id="contact" class="mx-auto max-w-6xl px-4 py-14">
-    <div class="rounded-2xl border p-6 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-      <div>
-        <h2 class="text-2xl sm:text-3xl font-bold">Let’s build something</h2>
-        <p class="mt-2 text-slate-600 dark:text-slate-300">Open to internships, junior dev roles, and freelance work. Fast learner, strong fundamentals.</p>
-      </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <a href="mailto:kemalbatut@gmail.com" class="rounded-xl bg-brand px-5 py-3 text-white font-medium shadow-glow">Email Me</a>
-        <a href="https://github.com/kemalbatut" target="_blank" rel="noopener noreferrer" class="rounded-xl border px-5 py-3 font-medium">GitHub</a>
-      </div>
-    </div>
-  </section>
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Robotics · Leadership · Autonomy</span>
+          <h3>Acadia Robofest</h3>
+          <p class="project-lead">Leading a team through an unknown-task robotics challenge.</p>
+        </div>
 
-  <!-- Footer -->
-  <footer class="py-10 text-center text-sm text-slate-500">
-    © <span id="year"></span> Kemal Batu Turgut. Built with HTML + Tailwind. Hosted on GitHub Pages.
+        <div class="project-details" data-reveal>
+          <p>
+            At Parkview Education Centre in Nova Scotia, I led a robotics team through
+            a competition environment where the robot had to be prepared for changing
+            tasks rather than a single scripted demo.
+          </p>
+          <p>
+            That experience shaped how I still build: define a big goal, break it into
+            daily testable steps, observe what the system actually does, then iterate.
+          </p>
+        </div>
+
+        <div class="project-specs" data-reveal>
+          <div><span>Role</span><strong>Team lead</strong></div>
+          <div><span>Domain</span><strong>Autonomous robotics</strong></div>
+          <div><span>Environment</span><strong>Competition</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="software-strip section-shell" aria-labelledby="software-title">
+      <div class="software-heading" data-reveal>
+        <p class="eyebrow">Software experiments</p>
+        <h2 id="software-title">Still very much a programmer.</h2>
+      </div>
+
+      <div class="software-list">
+        <a class="software-item" href="https://github.com/kemalbatut/cs-yolo" target="_blank" rel="noreferrer" data-reveal>
+          <span class="software-num">05</span>
+          <div>
+            <h3>CS-YOLO</h3>
+            <p>Computer vision · Python · C# · real-time inference</p>
+          </div>
+          <span class="software-arrow">↗</span>
+        </a>
+
+        <a class="software-item" href="https://github.com/kemalbatut/OOP345-Workshops/tree/main/Assignment4" target="_blank" rel="noreferrer" data-reveal>
+          <span class="software-num">06</span>
+          <div>
+            <h3>Assembly Line Simulator</h3>
+            <p>C++17 · multi-module systems · queues · production flow</p>
+          </div>
+          <span class="software-arrow">↗</span>
+        </a>
+
+        <a class="software-item" href="https://github.com/kemalbatut/OOP345-Workshops/tree/main/Assignment3" target="_blank" rel="noreferrer" data-reveal>
+          <span class="software-num">07</span>
+          <div>
+            <h3>Media Manager</h3>
+            <p>C++20 · RAII · smart pointers · STL · parsing</p>
+          </div>
+          <span class="software-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="about section-shell" id="about">
+      <div class="about-label" data-reveal>
+        <p class="eyebrow">About / approach</p>
+      </div>
+
+      <div class="about-main" data-reveal>
+        <p class="about-statement">
+          I am more interested in <em>why a system behaves the way it does</em>
+          than in making a demo look finished quickly.
+        </p>
+        <p class="about-body">
+          My path has moved through software, digital logic, embedded prototypes,
+          robotics, and industrial automation exposure. The common thread is that I
+          like systems with consequences: memory changes, signals propagate, motors
+          move, mechanisms bind, timing matters, and debugging requires observation.
+        </p>
+      </div>
+
+      <div class="about-stack" data-reveal>
+        <div class="stack-line"><span>Languages</span><p>C++ · Python · JavaScript · TypeScript · SQL</p></div>
+        <div class="stack-line"><span>Systems</span><p>Memory · STL · concurrency · data structures · Linux</p></div>
+        <div class="stack-line"><span>Embedded</span><p>Arduino · digital logic · actuators · sensors · timing</p></div>
+        <div class="stack-line"><span>Tooling</span><p>Git · CMake · Docker · Conan · vcpkg · CI/CD</p></div>
+      </div>
+    </section>
+
+    <section class="numbers" aria-label="Project numbers">
+      <div class="number-block" data-reveal>
+        <strong>8</strong><span>bits</span><small>custom CPU data width</small>
+      </div>
+      <div class="number-block" data-reveal>
+        <strong>4</strong><span>DOF</span><small>ScrapArm motion axes</small>
+      </div>
+      <div class="number-block" data-reveal>
+        <strong>64</strong><span>bits</span><small>flip-flop RAM in the CPU</small>
+      </div>
+      <div class="number-block" data-reveal>
+        <strong>3</strong><span>countries</span><small>education across Türkiye, Poland & Canada</small>
+      </div>
+    </section>
+
+    <section class="education section-shell" id="education">
+      <div class="education-heading" data-reveal>
+        <p class="eyebrow">Education</p>
+        <h2>Built across different places, disciplines, and levels of abstraction.</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item" data-reveal>
+          <span class="timeline-year">2026—2028</span>
+          <div>
+            <h3>Bachelor of Computer Science</h3>
+            <p>Seneca Polytechnic · Toronto, Ontario</p>
+            <small>Expected graduation: June 2028</small>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-reveal>
+          <span class="timeline-year">2023—2025</span>
+          <div>
+            <h3>Computer Programming Diploma</h3>
+            <p>Seneca Polytechnic · Toronto, Ontario</p>
+            <small>C++, systems, web, databases, Linux, software design</small>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-reveal>
+          <span class="timeline-year">2022—2023</span>
+          <div>
+            <h3>Parkview Education Centre</h3>
+            <p>Nova Scotia, Canada</p>
+            <small>Exchange year · robotics team leadership · Acadia Robofest</small>
+          </div>
+        </article>
+
+        <article class="timeline-item" data-reveal>
+          <span class="timeline-year">2019</span>
+          <div>
+            <h3>Erasmus+ Exchange</h3>
+            <p>Lublin, Poland</p>
+            <small>International high-school exchange program</small>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="contact-orb" aria-hidden="true"></div>
+      <div class="contact-inner section-shell">
+        <p class="eyebrow" data-reveal>Next chapter</p>
+        <h2 data-reveal>Let’s build something <em>real.</em></h2>
+        <p class="contact-copy" data-reveal>
+          I’m looking for co-op opportunities where software meets systems,
+          embedded hardware, robotics, infrastructure, or performance-critical engineering.
+        </p>
+
+        <div class="contact-actions" data-reveal>
+          <a class="button button-light magnetic" href="mailto:kemalbatut@gmail.com">kemalbatut@gmail.com</a>
+          <a class="text-link text-link-light" href="https://github.com/kemalbatut" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Kemal Batu Turgut</span>
+    <span>Designed around the work, not a template.</span>
+    <a href="#top">Back to top ↑</a>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-   document.getElementById('themeBtn').addEventListener('click', () => {
-    const root = document.documentElement;
-    const DURATION_MS = 700; // <- adjust to taste (500–1000ms is comfy)
-
-    // Add transition class just for the toggle moment
-    root.classList.add('theme-transition');
-
-    // Toggle dark class (your current behavior) and persist
-    const isDark = root.classList.toggle('dark');
-    themeStore.set(isDark ? 'dark' : 'light');
-
-    // Clean up after the transition finishes
-    window.setTimeout(() => {
-      root.classList.remove('theme-transition');
-    }, DURATION_MS);
-  });
-</script>
-
-  </script>
-
-  <!-- Keeps --header-h var in sync with the sticky header height -->
-  <script>
-    (() => {
-      const header = document.querySelector('header');
-      if (!header) return;
-      const setHeaderH = () => {
-        const h = Math.ceil(header.getBoundingClientRect().height);
-        document.documentElement.style.setProperty('--header-h', h + 'px');
-      };
-      const ro = new ResizeObserver(setHeaderH);
-      ro.observe(header);
-      window.addEventListener('load', setHeaderH);
-      setHeaderH();
-    })();
-  </script>
-
-  <!-- Squares background logic -->
-  <script type="module" src="/square.js"></script>
-
-
-  <!-- Schema.org JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Kemal Batu Turgut",
-  "jobTitle": "Computer Science Student",
-  "url": "https://yourdomain.dev",
-  "sameAs": [
-    "https://github.com/kemalbatut",
-    "https://www.linkedin.com/in/yourhandle"
-  ],
-  "knowsAbout": [
-    "Data Structures & Algorithms",
-    "Object-Oriented Programming",
-    "Systems Programming",
-    "Memory Management",
-    "Concurrency",
-    "Computer Architecture",
-    "Digital Logic Design",
-    "CPU Design",
-    "SRAM Design",
-    "Embedded Systems",
-    "Robotics",
-    "Arduino",
-    "Software Testing",
-    "CI/CD",
-    "APIs",
-    "Databases",
-    "Git",
-    "Linux",
-    "C++",
-    "JavaScript",
-    "Node.js"
-  ]
-}
-</script>
-
-
+  <script type="module" src="./site.js"></script>
 </body>
 </html>
