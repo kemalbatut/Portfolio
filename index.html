@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Kemal Batu Turgut — Computer Science student focused on systems, embedded software, robotics, and computer architecture." />
-  <meta name="theme-color" content="#11110f" />
+  <meta name="theme-color" content="#0b0b0a" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <script>
+    (() => {
+      const saved = localStorage.getItem("portfolio-theme");
+      document.documentElement.dataset.theme = saved === "light" ? "light" : "dark";
+    })();
+  </script>
   <meta property="og:title" content="Kemal Batu Turgut — Systems, Embedded & Robotics" />
   <meta property="og:description" content="From gate-level logic to physical robots: selected engineering projects, systems work, and experiments." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="./media/8bit_ALU.png" />
+  <meta property="og:image" content="./media/Robofest  05 copy.jpg" />
   <title>Kemal Batu Turgut — Systems, Embedded & Robotics</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,11 +39,10 @@
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </nav>
-
-    <a class="availability" href="#contact">
-      <span class="availability-dot"></span>
-      Open to co-op
-    </a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle dark / light mode">
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+    </button>
   </header>
 
   <main id="top">
@@ -101,12 +107,85 @@
       </p>
     </section>
 
+    <section class="project-story project-paper" id="robofest-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame" data-parallax-image>
+          <img src="./media/Robofest  05 copy.jpg" alt="Acadia Robofest autonomous robot project" />
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">01</span>
+        </div>
+      </div>
+
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Robotics · Leadership · Autonomy</span>
+          <h3>Acadia Robofest</h3>
+          <p class="project-lead">Leading a team through an unknown-task robotics challenge.</p>
+        </div>
+
+        <div class="project-details" data-reveal>
+          <p>
+            At Parkview Education Centre in Nova Scotia, I led a robotics team through
+            a competition environment where the robot had to be prepared for changing
+            tasks rather than a single scripted demo.
+          </p>
+          <p>
+            That experience shaped how I still build: define a big goal, break it into
+            daily testable steps, observe what the system actually does, then iterate.
+          </p>
+        </div>
+
+        <div class="project-specs" data-reveal>
+          <div><span>Role</span><strong>Team lead</strong></div>
+          <div><span>Domain</span><strong>Autonomous robotics</strong></div>
+          <div><span>Environment</span><strong>Competition</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-story project-blue" id="scraprover-project" data-project>
+      <div class="project-media-wrap">
+        <div class="project-frame" data-parallax-image>
+          <img src="./media/scraprover-hero.png" alt="ScrapRover mobile robotics platform" />
+          <div class="project-media-overlay"></div>
+          <span class="project-media-index">02</span>
+        </div>
+      </div>
+
+      <div class="project-copy">
+        <div class="project-heading" data-reveal>
+          <span class="project-kicker">Mobile robotics · Embedded control</span>
+          <h3>ScrapRover</h3>
+          <p class="project-lead">The next physical platform in the Scrap series.</p>
+        </div>
+
+        <div class="project-details" data-reveal>
+          <p>
+            ScrapRover extends the same build-first philosophy into mobile robotics:
+            motor control, power distribution, sensing, navigation logic, and the
+            iterative process of making software survive contact with a physical platform.
+          </p>
+          <p>
+            The current prototype brings the controller, breadboard electronics,
+            power wiring, and wheeled chassis together on one compact platform — an
+            intentionally rough build used to test the integration before a cleaner revision.
+          </p>
+        </div>
+
+        <div class="project-specs" data-reveal>
+          <div><span>Focus</span><strong>Mobile robotics</strong></div>
+          <div><span>Layer</span><strong>Hardware ↔ control</strong></div>
+          <div><span>Status</span><strong>Active build</strong></div>
+        </div>
+      </div>
+    </section>
+
     <section class="project-story project-dark" id="cpu-project" data-project>
       <div class="project-media-wrap">
         <div class="project-frame project-frame-dark" data-parallax-image>
           <img src="./media/8bit_ALU.png" alt="8-bit CPU digital logic circuit" />
           <div class="project-media-overlay"></div>
-          <span class="project-media-index">01</span>
+          <span class="project-media-index">03</span>
         </div>
       </div>
 
@@ -148,7 +227,7 @@
         <div class="project-frame" data-parallax-image>
           <img src="./media/scraparm-full.jpg" alt="ScrapArm 4-DOF robotic arm prototype" />
           <div class="project-media-overlay"></div>
-          <span class="project-media-index">02</span>
+          <span class="project-media-index">04</span>
         </div>
       </div>
 
@@ -189,83 +268,6 @@
         </div>
 
         <a class="project-link" href="https://github.com/kemalbatut/ScrapArm-v1" target="_blank" rel="noreferrer">View ScrapArm repository <span>↗</span></a>
-      </div>
-    </section>
-
-    <section class="project-story project-blue" id="scraprover-project" data-project>
-      <div class="project-media-wrap">
-        <div class="project-frame image-fallback" data-parallax-image data-image-fallback>
-          <img src="./media/scraprover-hero.jpg" alt="ScrapRover mobile robotics platform" />
-          <div class="fallback-copy">
-            <span>ScrapRover</span>
-            <small>project photo reserved</small>
-          </div>
-          <div class="project-media-overlay"></div>
-          <span class="project-media-index">03</span>
-        </div>
-      </div>
-
-      <div class="project-copy">
-        <div class="project-heading" data-reveal>
-          <span class="project-kicker">Mobile robotics · Embedded control</span>
-          <h3>ScrapRover</h3>
-          <p class="project-lead">The next physical platform in the Scrap series.</p>
-        </div>
-
-        <div class="project-details" data-reveal>
-          <p>
-            ScrapRover extends the same build-first philosophy into mobile robotics:
-            motor control, power distribution, sensing, navigation logic, and the
-            iterative process of making software survive contact with a physical platform.
-          </p>
-          <p class="muted-note">
-            This section is already designed for the final build photo. Drop
-            <code>scraprover-hero.jpg</code> into the media folder and the layout will
-            switch from the reserved artwork to the real machine automatically.
-          </p>
-        </div>
-
-        <div class="project-specs" data-reveal>
-          <div><span>Focus</span><strong>Mobile robotics</strong></div>
-          <div><span>Layer</span><strong>Hardware ↔ control</strong></div>
-          <div><span>Status</span><strong>Active build</strong></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="project-story project-paper" id="robofest-project" data-project>
-      <div class="project-media-wrap">
-        <div class="project-frame" data-parallax-image>
-          <img src="./media/Robofest  05 copy.jpg" alt="Acadia Robofest autonomous robot project" />
-          <div class="project-media-overlay"></div>
-          <span class="project-media-index">04</span>
-        </div>
-      </div>
-
-      <div class="project-copy">
-        <div class="project-heading" data-reveal>
-          <span class="project-kicker">Robotics · Leadership · Autonomy</span>
-          <h3>Acadia Robofest</h3>
-          <p class="project-lead">Leading a team through an unknown-task robotics challenge.</p>
-        </div>
-
-        <div class="project-details" data-reveal>
-          <p>
-            At Parkview Education Centre in Nova Scotia, I led a robotics team through
-            a competition environment where the robot had to be prepared for changing
-            tasks rather than a single scripted demo.
-          </p>
-          <p>
-            That experience shaped how I still build: define a big goal, break it into
-            daily testable steps, observe what the system actually does, then iterate.
-          </p>
-        </div>
-
-        <div class="project-specs" data-reveal>
-          <div><span>Role</span><strong>Team lead</strong></div>
-          <div><span>Domain</span><strong>Autonomous robotics</strong></div>
-          <div><span>Environment</span><strong>Competition</strong></div>
-        </div>
       </div>
     </section>
 

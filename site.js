@@ -4,6 +4,31 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const root = document.documentElement;
+const themeToggle = document.getElementById("themeToggle");
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme, persist = true) {
+  const next = theme === "light" ? "light" : "dark";
+  root.dataset.theme = next;
+
+  if (persist) localStorage.setItem("portfolio-theme", next);
+  if (themeMeta) themeMeta.setAttribute("content", next === "dark" ? "#0b0b0a" : "#eeece6");
+
+  if (themeToggle) {
+    const nextLabel = next === "dark" ? "Switch to light mode" : "Switch to dark mode";
+    themeToggle.setAttribute("aria-label", nextLabel);
+    themeToggle.setAttribute("title", nextLabel);
+  }
+}
+
+applyTheme(root.dataset.theme || "dark", false);
+
+themeToggle?.addEventListener("click", () => {
+  applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
+});
+
 const header = document.querySelector(".site-header");
 const progress = document.querySelector(".scroll-progress span");
 
@@ -54,20 +79,21 @@ if (!prefersReducedMotion) {
     );
 
   gsap.to(".hero-orbit", {
-    rotate: 12,
-    yPercent: 8,
+    rotate: 30,
+    yPercent: 20,
     ease: "none",
     scrollTrigger: {
       trigger: "#hero",
       start: "top top",
       end: "bottom top",
-      scrub: 1.2
+      scrub: 0.65
     }
   });
 
   gsap.to(".hero-copy", {
-    yPercent: 12,
-    opacity: 0.25,
+    yPercent: 26,
+    opacity: 0.08,
+    scale: 0.965,
     ease: "none",
     scrollTrigger: {
       trigger: "#hero",
@@ -78,26 +104,26 @@ if (!prefersReducedMotion) {
   });
 
   gsap.to(".marquee-left", {
-    xPercent: -18,
+    xPercent: -38,
     ease: "none",
     scrollTrigger: {
       trigger: "#manifesto",
       start: "top bottom",
       end: "bottom top",
-      scrub: 1.3
+      scrub: 0.7
     }
   });
 
   gsap.fromTo(".marquee-right",
-    { xPercent: -15 },
+    { xPercent: -28 },
     {
-      xPercent: 5,
+      xPercent: 24,
       ease: "none",
       scrollTrigger: {
         trigger: "#manifesto",
         start: "top bottom",
         end: "bottom top",
-        scrub: 1.3
+        scrub: 0.7
       }
     }
   );
@@ -121,19 +147,59 @@ if (!prefersReducedMotion) {
     if (!img) return;
 
     gsap.fromTo(img,
-      { yPercent: -7, scale: 1.04 },
+      { yPercent: -16, scale: 1.10 },
       {
-        yPercent: 2,
-        scale: 1,
+        yPercent: 12,
+        scale: 1.015,
         ease: "none",
         scrollTrigger: {
           trigger: frame,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1.1
+          scrub: 0.55
         }
       }
     );
+  });
+
+
+  // Layered project drift for a more noticeable scroll-driven composition.
+  gsap.utils.toArray("[data-project]").forEach((project, index) => {
+    const copy = project.querySelector(".project-copy");
+    const frame = project.querySelector(".project-frame");
+
+    if (copy) {
+      gsap.fromTo(copy,
+        { yPercent: 7 },
+        {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: project,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.7
+          }
+        }
+      );
+    }
+
+    if (frame) {
+      gsap.fromTo(frame,
+        { rotate: index % 2 === 0 ? -1.1 : 1.1, scale: 0.985 },
+        {
+          rotate: index % 2 === 0 ? 0.75 : -0.75,
+          scale: 1.018,
+          ease: "none",
+          scrollTrigger: {
+            trigger: project,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.75
+          }
+        }
+      );
+    }
   });
 
   gsap.utils.toArray(".number-block strong").forEach((number) => {
@@ -151,15 +217,15 @@ if (!prefersReducedMotion) {
   });
 
   gsap.to(".contact-orb", {
-    yPercent: -16,
-    xPercent: -5,
-    scale: 1.08,
+    yPercent: -34,
+    xPercent: -14,
+    scale: 1.22,
     ease: "none",
     scrollTrigger: {
       trigger: ".contact",
       start: "top bottom",
       end: "bottom bottom",
-      scrub: 1.2
+      scrub: 0.65
     }
   });
 
